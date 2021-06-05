@@ -192,6 +192,14 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void Output::PrintInteger(int i) const	//Prints AN INTEGER ANA MEZAWDHA ~ABDO / HASHISH
+{
+	pWind->SetPen(UI.MsgColor, 50);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawInteger(220, UI.height - (int)(UI.StatusBarHeight / 1.5), i);
+}
+
+
 color Output::getCrntDrawColor() const	//get current drwawing color
 {
 	return UI.DrawColor;
@@ -207,6 +215,12 @@ color Output::getCrntFillColor() const	//get current filling color
 int Output::getCrntPenWidth() const		//get current pen width
 {
 	return UI.PenWidth;
+
+
+
+}color Output::getCrntHightLight() const		//get current pen width
+{
+	return UI.HighlightColor;
 }
 
 

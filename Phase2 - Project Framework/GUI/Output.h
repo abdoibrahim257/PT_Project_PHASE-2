@@ -25,11 +25,12 @@ public:
 	void DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) const;        //Draw a line
 	void DrawTriangle(Point P1, Point P2, Point p3, GfxInfo TriangleGfxInfo, bool selected) const;  //Draw a triangle
 	///Make similar functions for drawing all other figures.
-
+	void PrintInteger(int i) const;
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
+	color getCrntHightLight() const;
 	int getCrntPenWidth() const;		//get current pen width
 
 

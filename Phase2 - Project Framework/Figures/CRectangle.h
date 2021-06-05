@@ -3,6 +3,7 @@
 
 #include "CFigure.h"
 
+
 class CRectangle : public CFigure
 {
 private:
@@ -11,6 +12,8 @@ private:
 public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
 	virtual void Draw(Output* pOut) const;
+	void print(Output* pOut);
+	bool checkLoc(int x, int y);
 };
 
 #endif

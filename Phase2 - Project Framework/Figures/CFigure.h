@@ -8,21 +8,24 @@
 class CFigure
 {
 protected:
-	int ID;		//Each figure has an ID
-	bool Selected;	//true if the figure is selected.
+	int MYid;		//Each figure has an ID
+	bool Selected = false;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	
 	/// Add more parameters if needed.
 
 public:
+	static int ID;
 	CFigure(GfxInfo FigureGfxInfo);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-
+	int getID();
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
-	
+	virtual void print(Output* pOut);
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	void HighLightClr();	//changes the figure's filling color
+	virtual bool checkLoc(int x, int y);
 
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
