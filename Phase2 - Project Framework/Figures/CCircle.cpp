@@ -134,7 +134,19 @@ void CCircle::Save(ofstream& Outfile)
 	}
 }
 
-//void CCircle::Load(ifstream& Infile)
-//{
-//
-//}
+void CCircle::Load(ifstream& Infile)
+{
+	string draw_clr;
+	string fill;
+	Infile >> MYid >> Center.x >> Center.y >> Radius.x >> Radius.y;
+	Infile >> draw_clr >> fill;
+	FigGfxInfo.DrawClr = GetColor(draw_clr);
+	if (fill =="NO_FILL")
+	{
+		FigGfxInfo.isFilled = false;
+	}
+	else
+	{
+		FigGfxInfo.FillClr = GetColor(fill);
+	}
+}

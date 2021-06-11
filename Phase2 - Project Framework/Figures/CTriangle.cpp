@@ -164,7 +164,19 @@ bool CTriangle::isValid(Point p1, Point p2, Point p3) const
 
 
 
-//void CTriangle::Load(ifstream& Infile)
-//{
-//	
-//}
+void CTriangle::Load(ifstream& Infile)
+{
+	string draw_clr;
+	string fill;
+	Infile >> MYid >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> Corner3.x >> Corner3.y;
+	Infile >> draw_clr >> fill;
+	FigGfxInfo.DrawClr = GetColor(draw_clr);
+	if (fill == "NO_FILL")
+	{
+		FigGfxInfo.isFilled = false;
+	}
+	else
+	{
+		FigGfxInfo.FillClr = GetColor(fill);
+	}
+}

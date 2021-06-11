@@ -139,7 +139,19 @@ void CRectangle::Save(ofstream& Outfile)
 		Outfile << "NO_FILL\n";
 	}
 }
-//void CRectangle::Load(ifstream& Infile)
-//{
-//
-//}
+void CRectangle::Load(ifstream& Infile)
+{
+	string draw_clr;
+	string fill;
+	Infile >> MYid >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y;
+	Infile >> draw_clr >> fill;
+	FigGfxInfo.DrawClr = GetColor(draw_clr);
+	if (fill == "NO_FILL")
+	{
+		FigGfxInfo.isFilled = false;
+	}
+	else
+	{
+		FigGfxInfo.FillClr = GetColor(fill);
+	}
+}

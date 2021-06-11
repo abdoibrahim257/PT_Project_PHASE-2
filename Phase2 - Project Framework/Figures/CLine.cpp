@@ -124,7 +124,11 @@ void CLine::Save(ofstream& Outfile)
 	Outfile << "LINE\t" << MYid << "\t" << StartingPoint.x << "\t" << StartingPoint.y << "\t" << EndPoint.x << "\t";
 	Outfile << EndPoint.y << "\t" << DrawClr << "\n";
 }
-//void CLine::Load(ifstream& Infile)
-//{
-//
-//}
+void CLine::Load(ifstream& Infile)
+{
+	string draw_clr;
+	string fill;
+	Infile >> MYid >> StartingPoint.x >> StartingPoint.y >> EndPoint.x >> EndPoint.y;
+	Infile >> draw_clr;
+	FigGfxInfo.DrawClr = GetColor(draw_clr);
+}
