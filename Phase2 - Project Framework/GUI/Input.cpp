@@ -12,7 +12,7 @@ void Input::GetPointClicked(int& x, int& y) const
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
-string Input::GetSrting(Output* pO) const
+string Input::GetString(Output* pO) const
 {
 	string Label;
 	char Key;
@@ -137,6 +137,98 @@ ActionType Input::GetUserAction() const
 		}
 
 		//[3] User clicks on the status bar
+		return STATUS;
+	}
+	else if (UI.InterfaceMode == MODE_COLORITEM)
+	{
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_WHITE: return COLOR_WHITE;
+			case ITM_BLACK: return COLOR_BLACK;
+			case ITM_RED: return COLOR_RED;
+			case ITM_GREEN: return COLOR_GREEN;
+			case ITM_BLUE: return COLOR_BLUE;
+			case ITM_YELLOW: return COLOR_YELLOW;
+			case ITM_PURPLE: return COLOR_PURPLE;
+			case ITM_ORANGE: return COLOR_ORANGE;
+
+			default: return EMPTY;	//A click on empty place in design toolbar
+			}
+
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+		return STATUS;
+	}
+	else if (UI.InterfaceMode == MODE_FILLITEM)
+	{
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+
+
+			switch (ClickedItemOrder)
+			{
+			case fITM_WHITE: return FILL_WHITE;
+			case fITM_BLACK: return FILL_BLACK;
+			case fITM_RED: return FILL_RED;
+			case fITM_GREEN: return FILL_GREEN;
+			case fITM_BLUE: return FILL_BLUE;
+			case fITM_YELLOW: return FILL_YELLOW;
+			case fITM_PURPLE: return FILL_PURPLE;
+			case fITM_ORANGE: return FILL_ORANGE;
+
+			default: return EMPTY;	//A click on empty place in design toolbar
+			}
+
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+		return STATUS;
+	}
+	else if (UI.InterfaceMode == MODE_BACKCLRITEM)
+	{
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+
+			switch (ClickedItemOrder)
+			{
+			case BITM_WHITE: return BCFILL_WHITE;
+			case BITM_BLACK: return BCFILL_BLACK;
+			case BITM_RED: return BCFILL_RED;
+			case BITM_GREEN: return BCFILL_GREEN;
+			case BITM_BLUE: return BCFILL_BLUE;
+			case BITM_YELLOW: return BCFILL_YELLOW;
+			case BITM_PURPLE: return BCFILL_PURPLE;
+			case BITM_ORANGE: return BCFILL_ORANGE;
+
+			default: return EMPTY;	//A click on empty place in design toolbar
+			}
+
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
 		return STATUS;
 	}
 	///TODO:

@@ -11,7 +11,10 @@ enum GUI_MODE	//Graphical user interface mode
 {
 	MODE_DRAW,			//Drawing mode (startup mode)
 	MODE_PLAY,			//Playing mode
-	MODE_ADDITEM		//Add an item
+	MODE_ADDITEM,		//Add an item
+	MODE_COLORITEM,		//change color
+	MODE_FILLITEM,
+	MODE_BACKCLRITEM,
 };
 
 enum DrawMenuItem //The items of the Draw menu (you should add more items)
@@ -67,8 +70,55 @@ enum DrawFigureItem	//Items of figure list
 	ITM_CIRC,		//Draw a circle
 	ITM_BACK,		//Return to draw item
 	ADD_ITM_COUNT	//no. of "draw item" items
+
 };
 
+enum ChngDrwColor
+{
+
+	ITM_WHITE,
+	ITM_BLACK,
+	ITM_RED,
+	ITM_GREEN,
+	ITM_BLUE,
+	ITM_YELLOW,
+	ITM_PURPLE,
+	ITM_ORANGE,
+
+	COLOR_ITM_COUNT
+
+};
+
+enum ChngFillColor
+{
+
+	fITM_WHITE,
+	fITM_BLACK,
+	fITM_RED,
+	fITM_GREEN,
+	fITM_BLUE,
+	fITM_YELLOW,
+	fITM_PURPLE,
+	fITM_ORANGE,
+
+	FILL_ITM_COUNT
+
+};
+enum ChngBackColor
+{
+
+	BITM_WHITE,
+	BITM_BLACK,
+	BITM_RED,
+	BITM_GREEN,
+	BITM_BLUE,
+	BITM_YELLOW,
+	BITM_PURPLE,
+	BITM_ORANGE,
+
+	BACKCLR_ITM_COUNT
+
+};
 
 
 __declspec(selectany) //This line to prevent "redefinition error"

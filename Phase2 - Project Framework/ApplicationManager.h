@@ -14,7 +14,7 @@ class ApplicationManager
 	//Max no of figures
 
 private:
-
+	bool filled;
 	int FigCount;		//Actual number of figures
 	int SelecFigCount;	//selected figure counter
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
@@ -23,6 +23,11 @@ private:
 	//Pointers to Input and Output classes
 	Input* pIn;
 	Output* pOut;
+
+	CFigure** Clipboard;      //Clipboard which the selected figures will be copied/cut to (array of pointers)
+	bool IsInClipboard;      //Used to check that there is a figure in clipboard or not
+	bool IsFigCut;           //To know whether the figure in Clipboard is cut or copied
+
 
 public:
 	ApplicationManager();
@@ -38,15 +43,28 @@ public:
 	void AddSelectedFigure(CFigure* s);
 	void UNSelectFigure(CFigure* s);
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-
-	CFigure* GetSelectedFigs();
+	int GetFigCount();
+	void deleteFig();
+	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
+	void clearselcFig();
+	
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
 	Output* GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	virtual void printinfo(CFigure* s);
+
+	// -- Save/Load Functions
+	void SaveAll(ofstream &Outfile);
+
+	// -- Clipboard Functions
+	void SetClipboard(CFigure**);
+	CFigure** GetClipboard();
+	void SetIsFigCut(bool);
+	bool GetIsFigCut();    //To know whether the figure in Clipboard is cut or copied
+
 };
 
 #endif

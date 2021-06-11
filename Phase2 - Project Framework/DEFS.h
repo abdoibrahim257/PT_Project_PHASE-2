@@ -14,6 +14,43 @@ enum ActionType //The actions supported (you can add more if needed)
 	CHNG_DRAW_CLR,	//Change the drawing color
 	CHNG_FILL_CLR,	//Change the filling color
 	CHNG_BK_CLR,	//Change background color
+
+	/// //////////////////////////////////////////////////////////
+
+	COLOR_WHITE,
+	COLOR_BLACK,
+	COLOR_RED,
+	COLOR_GREEN,
+	COLOR_BLUE,
+	COLOR_YELLOW,
+	COLOR_PURPLE,
+	COLOR_ORANGE,
+
+	/// //////////////////////////////////////////////////////
+
+	FILL_WHITE,
+	FILL_BLACK,
+	FILL_RED,
+	FILL_GREEN,
+	FILL_BLUE,
+	FILL_YELLOW,
+	FILL_PURPLE,
+	FILL_ORANGE,
+	/////////////////////////////////////////////////////////
+
+	BCFILL_WHITE,
+	BCFILL_BLACK,
+	BCFILL_RED,
+	BCFILL_GREEN,
+	BCFILL_BLUE,
+	BCFILL_YELLOW,
+	BCFILL_PURPLE,
+	BCFILL_ORANGE,
+
+
+	///////////////////////////////////////////////////////////
+
+
 	SELECT,			//Select an item
 	MOVE,			//Move a figure(s)
 	RESIZE,			//Resize a figure(s)
@@ -34,6 +71,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,		//Switch interface to Play mode
 	TO_ADDITEM,		//Switch interface to Add item mode
+
 
 	BY_TYPE,            //Pick the same shapes
 	BY_COLOR,			//Pick the same colour

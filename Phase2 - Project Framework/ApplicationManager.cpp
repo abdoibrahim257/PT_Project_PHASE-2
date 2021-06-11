@@ -4,10 +4,17 @@
 #include "Actions\AddLineAction.h"
 #include "Actions\AddCircAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions/CopyAction.h"
+#include "Actions/PasteAction.h"
+#include "Actions\MoveAction.h"
+#include "Actions\ResizeAction.h"
+#include "Actions/SaveAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
 #include "Figures/CTriangle.h"
+#include "DEFS.h"
+#include "CMUgraphicsLib/CMUgraphics.h"
 
 
 int CFigure::ID = 0;
@@ -16,6 +23,7 @@ int CFigure::ID = 0;
 ApplicationManager::ApplicationManager()
 {
 	//Create Input and output
+	filled = false;
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
@@ -25,6 +33,11 @@ ApplicationManager::ApplicationManager()
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
+
+	for (int i = 0; i < MaxSelecCount; i++)
+	{
+		SelectedFigList[i] = NULL;
+	}
 }
 
 
@@ -46,7 +59,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	switch (ActType)
 	{
 	case DRAW_RECT:
-		pAct = new AddRectAction(this);
+		pAct = new AddRectAction(this, filled);
 		break;
 
 	case DRAW_LINE:
@@ -54,23 +67,190 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DRAW_TRI:
-		pAct = new AddTriAction(this);
+		pAct = new AddTriAction(this, filled);
 		break;
 
 	case DRAW_CIRC:
-		pAct = new AddCircAction(this);
+		pAct = new AddCircAction(this, filled);
 		break;
+
+		//case colors for change DRAW COLOR 
+			///////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_DRAW_CLR: //Change the drawing color
-		//pAct = new CHNG_DRAW-CLRAction(this);
+		pOut->CreateDrawClrToolBar();
+		pOut->PrintMessage("Choose color from following");
 		break;
+
+	case COLOR_WHITE:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = WHITE;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_BLACK:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = BLACK;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_RED:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = RED;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_GREEN:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = GREEN;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_BLUE:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = BLUE;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_YELLOW:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = YELLOW;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_PURPLE:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = PURPLE;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_ORANGE:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = ORANGE;
+		pOut->ClearStatusBar();
+		break;
+
+		/////////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_FILL_CLR:	//Change the filling color
-		//pAct = new CHNG_FILL-CLRAction(this);
+		pOut->CreateFillClrToolBar();
+		filled = true;
+		pOut->PrintMessage("Choose color from following");
 		break;
 
-	case CHNG_BK_CLR:	//Change background color
-		//pAct = new CHNG_BK-CLRAction(this);
+	case FILL_WHITE:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = WHITE;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_BLACK:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = BLACK;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_RED:
+
+		pOut->CreateDrawToolBar();
+		UI.FillColor = RED;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_GREEN:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = GREEN;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_BLUE:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = BLUE;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_YELLOW:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = YELLOW;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_PURPLE:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = PURPLE;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_ORANGE:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = ORANGE;
+		pOut->ClearStatusBar();
+		break;
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		//Change background color
+
+	case CHNG_BK_CLR:	
+		pOut->CreateBackClrToolBar();
+		pOut->PrintMessage("Choose color from following");
+		break;
+
+	case BCFILL_WHITE:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = WHITE;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+
+		break;
+
+	case BCFILL_BLACK:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = BLACK;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_RED:
+
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = RED;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_GREEN:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = GREEN;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_BLUE:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = BLUE;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_YELLOW:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = YELLOW;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_PURPLE:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = PURPLE;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_ORANGE:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = ORANGE;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
 		break;
 
 	case SELECT:		//Select an item
@@ -78,23 +258,26 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case MOVE:			//Move a figure(s)
-		//pAct = new MOVEAction(this);
+		pAct = new MoveAction(this);
 		break;
 
 	case RESIZE:		//Resize a figure(s)
-		//pAct = new RESIZEAction(this);
+		pAct = new ResizeAction(this);
 		break;
 
 	case DEL:			//Delete a figure(s)
-		//pAct = new DElAction(this);
+		deleteFig();
+		pOut->ClearDrawArea();
+		pOut->ClearStatusBar();
+		pOut->PrintMessage("Figure(s) Deleted succesfully");
 		break;
 
 	case COPY:           //Copy an item to Clipboard
-		//pAct = new COPYAction(this);
+		pAct = new CopyAction(this);
 		break;
 
 	case PASTE:         //Paste an item from Clipboard
-		//pAct = new PASTEAction(this);
+		pAct = new PasteAction(this);
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
@@ -102,7 +285,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case SAVE:			//Save the whole graph to a file
-		//pAct = new SAVEAction(this);
+		pAct = new SaveAction(this);
 		break;
 
 	case LOAD:			//Load a graph from a file
@@ -199,12 +382,9 @@ void ApplicationManager::AddSelectedFigure(CFigure* s)
 		SelectedFigList[SelecFigCount++] = s;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetSelectedFigs()
+CFigure* *ApplicationManager::GetSelectedFigs()
 {
-	for (int i = 0; i < SelecFigCount; i++)
-	{
-		return SelectedFigList[i];
-	}
+	return SelectedFigList;
 }
 
 int ApplicationManager::GetSelectedCount()
@@ -212,6 +392,10 @@ int ApplicationManager::GetSelectedCount()
 	return SelecFigCount;
 }
 
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
 void ApplicationManager::UNSelectFigure(CFigure* s)
 {
 	for (int i = 0; i < SelecFigCount; i++)
@@ -226,13 +410,14 @@ void ApplicationManager::UNSelectFigure(CFigure* s)
 	}
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-	for (int i = 0; i < FigCount; i++)
+	for (int i = FigCount - 1; i >= 0; i--)
 	{
 		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]);
 		if (C != NULL)
@@ -261,7 +446,6 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 			if (FigList[i]->checkLoc(x, y))
 				return FigList[i];
 		}
-
 	}
 
 	///Add your code here to search for a figure given a point x,y	
@@ -270,6 +454,41 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 }
 
 
+void ApplicationManager::deleteFig()
+{
+	int k = 0;
+	for (int i = 0; i < MaxFigCount; i++)
+	{
+		if (!FigList[i - k])
+		{
+			break;
+		}
+		if (FigList[i - k]->IsSelected())
+		{
+			clearselcFig();
+			delete FigList[i - k];
+			FigList[i - k] = FigList[FigCount - 1];
+			FigList[FigCount - 1] = NULL;
+			FigCount--;
+			k++;
+		}
+	}
+}
+
+
+
+
+//==================================================================================//
+//								Save Related Functions								//
+//==================================================================================//
+
+void ApplicationManager::SaveAll(ofstream& Outfile)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->Save(Outfile); //Call Save Function
+	}
+}
 
 //==================================================================================//
 //							Interface Management Functions							//
@@ -281,6 +500,18 @@ void ApplicationManager::UpdateInterface() const
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::clearselcFig()
+{
+	for (int i = 0; i < SelecFigCount; i++)
+	{
+		SelectedFigList[i] = NULL;
+	}
+	SelecFigCount = 0;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const
@@ -303,4 +534,30 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 
+}
+
+//=================================================================================//
+//                 Clipboard used for Copy, Cut & Paste Functions                  //
+//=================================================================================//
+void ApplicationManager::SetClipboard(CFigure** fig)
+{
+	IsInClipboard = true;
+	Clipboard = fig;
+}
+CFigure** ApplicationManager::GetClipboard()
+{
+	if (IsInClipboard)
+		return Clipboard;
+	else
+		return NULL;
+}
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::SetIsFigCut(bool b)
+{
+	IsFigCut = b;
+}
+////////////////////////////////////////////////////////////////////
+bool ApplicationManager::GetIsFigCut()
+{
+	return IsFigCut;
 }

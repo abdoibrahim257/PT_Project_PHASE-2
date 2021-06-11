@@ -5,8 +5,10 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
-{}
+AddRectAction::AddRectAction(ApplicationManager* pApp, bool filled) :Action(pApp)
+{
+	RectGfxInfo.isFilled = filled;
+}
 
 void AddRectAction::ReadActionParameters() 
 {	
@@ -24,7 +26,7 @@ void AddRectAction::ReadActionParameters()
 	//Read 2nd corner and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
 
-	RectGfxInfo.isFilled = false;	//default is not filled
+	//RectGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();

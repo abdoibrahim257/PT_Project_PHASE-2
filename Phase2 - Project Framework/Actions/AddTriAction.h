@@ -10,7 +10,7 @@ private:
 	Point P1, P2, P3; //Triangle Corners
 	GfxInfo TriGfxInfo;
 public:
-	AddTriAction(ApplicationManager* pApp);
+	AddTriAction(ApplicationManager* pApp, bool filled = false);
 
 	//Reads triangle parameters
 	virtual void ReadActionParameters();

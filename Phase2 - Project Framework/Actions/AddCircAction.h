@@ -10,7 +10,7 @@ private:
 	Point P1, P2; //Circle Center and radius point
 	GfxInfo CircGfxInfo;
 public:
-	AddCircAction(ApplicationManager* pApp);
+	AddCircAction(ApplicationManager* pApp, bool filled=false);
 
 	//Reads circle parameters
 	virtual void ReadActionParameters();
@@ -18,6 +18,7 @@ public:
 	//Add circle to the ApplicationManager
 	virtual void Execute();
 	~AddCircAction();
+
 };
 
 #endif

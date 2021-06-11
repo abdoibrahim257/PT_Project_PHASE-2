@@ -28,6 +28,8 @@ public:
 	//To redo this action (code depends on action type)
 	//virtual void Redo()=0;
 
+	/*virtual int GetWidth() = 0;   //Function that gets width of the drawn figure
+	virtual int GetHeight() = 0;   //Function that gets height of the drawn figure*/
 };
 
 #endif

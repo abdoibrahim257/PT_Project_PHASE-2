@@ -6,8 +6,10 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddTriAction::AddTriAction(ApplicationManager* pApp) :Action(pApp)
-{}
+AddTriAction::AddTriAction(ApplicationManager* pApp, bool filled) :Action(pApp)
+{
+	TriGfxInfo.isFilled = filled;
+}
 
 void AddTriAction::ReadActionParameters()
 {
@@ -30,7 +32,7 @@ void AddTriAction::ReadActionParameters()
 	//Read 3st corner and store in point P3
 	pIn->GetPointClicked(P3.x, P3.y);
 
-	TriGfxInfo.isFilled = false;	//default is not filled
+	//TriGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	TriGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriGfxInfo.FillClr = pOut->getCrntFillColor();

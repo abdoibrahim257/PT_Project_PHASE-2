@@ -6,8 +6,10 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-AddCircAction::AddCircAction(ApplicationManager* pApp) :Action(pApp)
-{}
+AddCircAction::AddCircAction(ApplicationManager* pApp, bool filled) :Action(pApp)
+{
+	CircGfxInfo.isFilled = filled;
+}
 
 void AddCircAction::ReadActionParameters()
 {
@@ -25,7 +27,7 @@ void AddCircAction::ReadActionParameters()
 	//Read radius point and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
 
-	CircGfxInfo.isFilled = false;	//default is not filled
+	//CircGfxInfo.isFilled = false;	//default is not filled
 	//get drawing, filling colors and pen width from the interface
 	CircGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircGfxInfo.FillClr = pOut->getCrntFillColor();
